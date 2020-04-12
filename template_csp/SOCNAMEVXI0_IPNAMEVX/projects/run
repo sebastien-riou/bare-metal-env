@@ -1,0 +1,19 @@
+#!/bin/sh
+
+#/git-bash.exe -c "python $1/$1.py ${@:2} ; read var"
+#/git-bash.exe -c "python $1/$1.py ${@:2}"
+
+if [ $1 == "--nowin" ] 
+then
+    shift
+    project=${1%/}
+    shift
+    python $project/$project.py $*
+else
+    project=${1%/}
+    #echo $project
+    shift
+    #echo $@
+    #echo $*
+    start bash -c "python $project/$project.py $*;$SHELL"
+fi 

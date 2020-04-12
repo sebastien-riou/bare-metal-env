@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -e
+
+filter() {
+    items=()
+    rule=$1
+    shift
+    for x in "$@"
+    do
+        if $rule "$x"; then
+            items+=("$x")
+        fi
+    done
+}
+
+# keep entry if: is a directories AND is not "./RemoteSystemsTempFiles"
+keep_rule() { [ -d $1 -a $1 != "./RemoteSystemsTempFiles" ]; }
+
+TOOL=./$1
+allfiles=(./*)
+filter keep_rule "${allfiles[@]}"
+projects=("${items[@]}")
+#echo "projects= ${projects[@]}"
+for d in "${projects[@]}" ; do
+    echo ""
+    echo "processing $d"
+    ${TOOL} ${d} "${@:2}"
+done
+
+echo "${#projects[@]} projects processed"

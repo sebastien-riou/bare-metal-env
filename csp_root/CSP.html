@@ -1,0 +1,975 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><style>@font-face {
+  font-family: octicons-anchor;
+  src: url(https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.woff) format('woff');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 980px;
+    margin-right: auto;
+    margin-left: auto;
+    color:#333;
+    background:#fff;
+}
+
+body .markdown-body {
+    padding: 45px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    word-wrap: break-word;
+}
+
+pre {
+    font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.markdown-body {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background-color: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body input {
+  font: 13px / 1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.markdown-body a {
+  color: #4078c0;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body hr:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.markdown-body .select::-ms-expand {
+  opacity: 0;
+}
+
+.markdown-body .octicon {
+  font: normal normal normal 16px/1 octicons-anchor;
+  display: inline-block;
+  text-decoration: none;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.markdown-body .octicon-link:before {
+  content: '\f05c';
+}
+
+.markdown-body:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.markdown-body .anchor {
+  display: inline-block;
+  padding-right: 2px;
+  margin-left: -18px;
+}
+
+.markdown-body .anchor:focus {
+  outline: none;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+  color: #000;
+  vertical-align: middle;
+  visibility: hidden;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+  text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h1 .anchor {
+  line-height: 1;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 .anchor {
+  line-height: 1;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h3 .anchor {
+  line-height: 1.2;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h4 .anchor {
+  line-height: 1.2;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h5 .anchor {
+  line-height: 1.1;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body h6 .anchor {
+  line-height: 1.1;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: #fff;
+}
+
+.markdown-body code {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+.markdown-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb;
+}
+
+.markdown-body .pl-c {
+  color: #969896;
+}
+
+.markdown-body .pl-c1,
+.markdown-body .pl-s .pl-v {
+  color: #0086b3;
+}
+
+.markdown-body .pl-e,
+.markdown-body .pl-en {
+  color: #795da3;
+}
+
+.markdown-body .pl-s .pl-s1,
+.markdown-body .pl-smi {
+  color: #333;
+}
+
+.markdown-body .pl-ent {
+  color: #63a35c;
+}
+
+.markdown-body .pl-k {
+  color: #a71d5d;
+}
+
+.markdown-body .pl-pds,
+.markdown-body .pl-s,
+.markdown-body .pl-s .pl-pse .pl-s1,
+.markdown-body .pl-sr,
+.markdown-body .pl-sr .pl-cce,
+.markdown-body .pl-sr .pl-sra,
+.markdown-body .pl-sr .pl-sre {
+  color: #183691;
+}
+
+.markdown-body .pl-v {
+  color: #ed6a43;
+}
+
+.markdown-body .pl-id {
+  color: #b52a1d;
+}
+
+.markdown-body .pl-ii {
+  background-color: #b52a1d;
+  color: #f8f8f8;
+}
+
+.markdown-body .pl-sr .pl-cce {
+  color: #63a35c;
+  font-weight: bold;
+}
+
+.markdown-body .pl-ml {
+  color: #693a17;
+}
+
+.markdown-body .pl-mh,
+.markdown-body .pl-mh .pl-en,
+.markdown-body .pl-ms {
+  color: #1d3e81;
+  font-weight: bold;
+}
+
+.markdown-body .pl-mq {
+  color: #008080;
+}
+
+.markdown-body .pl-mi {
+  color: #333;
+  font-style: italic;
+}
+
+.markdown-body .pl-mb {
+  color: #333;
+  font-weight: bold;
+}
+
+.markdown-body .pl-md {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.markdown-body .pl-mi1 {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.markdown-body .pl-mdr {
+  color: #795da3;
+  font-weight: bold;
+}
+
+.markdown-body .pl-mo {
+  color: #1d3e81;
+}
+
+.markdown-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb;
+}
+
+.markdown-body .plan-price-unit {
+  color: #767676;
+  font-weight: normal;
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 0.35em 0.25em -1.6em;
+  vertical-align: middle;
+}
+
+.markdown-body .plan-choice {
+  padding: 15px;
+  padding-left: 40px;
+  display: block;
+  border: 1px solid #e0e0e0;
+  position: relative;
+  font-weight: normal;
+  background-color: #fafafa;
+}
+
+.markdown-body .plan-choice.open {
+  background-color: #fff;
+}
+
+.markdown-body .plan-choice.open .plan-choice-seat-breakdown {
+  display: block;
+}
+
+.markdown-body .plan-choice-free {
+  border-radius: 3px 3px 0 0;
+}
+
+.markdown-body .plan-choice-paid {
+  border-radius: 0 0 3px 3px;
+  border-top: 0;
+  margin-bottom: 20px;
+}
+
+.markdown-body .plan-choice-radio {
+  position: absolute;
+  left: 15px;
+  top: 18px;
+}
+
+.markdown-body .plan-choice-exp {
+  color: #999;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.markdown-body .plan-choice-seat-breakdown {
+  margin-top: 10px;
+  display: none;
+}
+
+.markdown-body :checked+.radio-label {
+  z-index: 1;
+  position: relative;
+  border-color: #4078c0;
+}
+
+@media print {
+  body .markdown-body {
+    padding: 0;
+    border: none;
+  }
+}
+</style><title>CSP</title></head><body><article class="markdown-body"><h1>
+<a id="user-content-chip-support-package" class="anchor" href="#chip-support-package" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Chip Support Package</h1>
+<p>This is a cross platform bare metal development environment which aims at being usable from command line and from IDEs like Eclipse. An aditional goal is to observe the "DRY" principle ("Don't Repeat Yourself").</p>
+<h2>
+<a id="user-content-concepts" class="anchor" href="#concepts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Concepts</h2>
+<p>The folder containing this file is referred as <code>CSP_ROOT</code></p>
+<p>This package use several kind of targe identifiers, this section present them.
+A tool is able to test those identifiers via environment variables. Source code can do the same via defines. Those identifiers are also used to name the directories whithin the CSP package.</p>
+<h3>
+<a id="user-content-sdk-short-names-and-long-names" class="anchor" href="#sdk-short-names-and-long-names" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SDK short names and long names</h3>
+<p>A target device in this package is a particular CPU inside a particular SOC.
+A toolchain is usually tied to the CPU type and is agnosic to the SOC around however when it comes to londing a program in memory and communicated with the running program, the knownledge of the SOC does matter. To take this into account, a toolchain is identified using an "SDK short name" and a particular CPU in a particular SOC using an "SDK long name".</p>
+<ul>
+<li>SDK short name: exact type and version of the targeted CPU.</li>
+<li>SDK long name:
+<ul>
+<li>SOC part number</li>
+<li>Instance number of the targeted CPU</li>
+<li>SDK short name of the targeted CPU</li>
+</ul>
+</li>
+</ul>
+<h3>
+<a id="user-content-sdk-generic-names" class="anchor" href="#sdk-generic-names" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SDK generic names</h3>
+<p>Often the toolchain is the same regardless of the exact version of the targeted CPU. To take this into account we define variants of the SDK short names and long names which are generic: version numbers are omitted or replaced by "X".</p>
+<h2>
+<a id="user-content-installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+<ul>
+<li>Extract CSP package in a path without any space.</li>
+<li>See README.md within the folder dedicated to your target.</li>
+</ul>
+<h2>
+<a id="user-content-dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies</h2>
+<h3>
+<a id="user-content-python" class="anchor" href="#python" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Python</h3>
+<p>All python scripts within the package are tested using Python 3.7 64 bit.</p>
+<h2>
+<a id="user-content-usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+<p><code>CSP_ROOT</code> folder contains one or more folders specific to a target. Each folder has the same structure and contains "launch scripts" at the top level.
+When trying out a new package, we recommend to try the command line first.</p>
+<p>All "launch scripts" take two positional arguements:</p>
+<ul>
+<li>SDK_ROOT</li>
+<li>SDK_SHORT_NAME</li>
+</ul>
+<p>Reasonable defaults are provided but you may want something different. In this case you can either set them directly while calling the script or by setting them as environment variables.</p>
+<p>No matter if you use command line or an IDE, all actions are performed by the makefile targets.</p>
+<h3>
+<a id="user-content-makefile-targets" class="anchor" href="#makefile-targets" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Makefile targets</h3>
+<h4>
+<a id="user-content-the-clean-target" class="anchor" href="#the-clean-target" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>clean</code> target</h4>
+<p>Remove from disk all output files produced by other targets.</p>
+<p><g-emoji class="g-emoji" alias="warning" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png">⚠️</g-emoji> <strong>WARNING</strong>: <code>clean</code> erase everything under the directory <code>$BUILD_DIR/obj</code>.</p>
+<h4>
+<a id="user-content-the-build-target" class="anchor" href="#the-build-target" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>build</code> target</h4>
+<p>Create the following files:</p>
+<ul>
+<li>.elf: the program image as an elf file</li>
+<li>.naked.elf: .elf stripped of unecessary symbols such as debug info</li>
+<li>.map: map file generated by linker</li>
+<li>.ihex: the program binary image as an "intel-hex" file</li>
+<li>.bin: the program binary image as a raw file</li>
+<li>.v: file to load a memory in verilog simulator</li>
+<li>.disassembly: disassembly of the full program</li>
+<li>.size: size report including debug sections</li>
+<li>.naked.size: actual size report</li>
+</ul>
+<h4>
+<a id="user-content-the-rebuild-target" class="anchor" href="#the-rebuild-target" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>rebuild</code> target</h4>
+<p>Short cut for <code>clean build</code>. The first thing to try when you get unexpected results.</p>
+<p><g-emoji class="g-emoji" alias="grimacing" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62c.png">😬</g-emoji> <strong>NOTE</strong>: Under some circumstances even <code>rebuild</code> may fail despite a perfectly valid source tree. This is due to the dependency tracking mechanism. Try <code>rebuild</code> a second time, if it fails again then the source tree may not be that perfect.</p>
+<h4>
+<a id="user-content-the-load-target" class="anchor" href="#the-load-target" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>load</code> target</h4>
+<p>Load <code>.ihex</code> file in memory. It triggers the <code>build</code> target if needed.</p>
+<p>If you want to just load the current <code>.ihex</code> without checking anything, use the <code>just_load</code> target.</p>
+<h4>
+<a id="user-content-the-run-target" class="anchor" href="#the-run-target" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>run</code> target</h4>
+<p>Launch <code>&lt;project_name&gt;.py</code>. If it detects that the latest <code>ihex</code> as not been loaded, it triggers the <code>load</code> target (which may in turn launch the <code>build</code> target).</p>
+<p><g-emoji class="g-emoji" alias="grimacing" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62c.png">😬</g-emoji> <strong>NOTE</strong>: Using that target does not guarantee that you have the latest <code>ihex</code> is running in your device. For example if you use <code>load</code> and then change the board connected to your computer and the use this target...</p>
+<p><g-emoji class="g-emoji" alias="heavy_check_mark" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji> <strong>NOTE</strong>: Using <code>clean run</code> does guarantee that the latest <code>ihex</code> is running in your device.</p>
+<p>If you want to just run the script without checking anything, use the <code>just_run</code> target.</p>
+<h3>
+<a id="user-content-command-line" class="anchor" href="#command-line" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Command line</h3>
+<p>Environment verification:</p>
+<ul>
+<li>
+<p>Run the <code>launch_shell</code> script (<code>launch_shell.bat</code> for Windows user).</p>
+<ul>
+<li>You shall get a command line prompt and the current directory shall be the <code>projects</code>
+</li>
+</ul>
+</li>
+<li>
+<p>Check the environment variables displayed.</p>
+<ul>
+<li>The first 3 depends on the location of the "launch script", if they don't match your expectation then you are using the wrong "launch script"
+<ul>
+<li>CSP_ROOT</li>
+<li>SDK_LONG_NAME_PREFIX</li>
+<li>SDK_GENERIC_SHORT_NAME</li>
+</ul>
+</li>
+<li>The last 2 already presented in this section
+<ul>
+<li>SDK_SHORT_NAME: shall match the exact version of your target</li>
+<li>SDK_ROOT: shall match the location of the SDK you want to use</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Check that all project build fine:</p>
+<pre><code>  all mk rebuild
+</code></pre>
+</li>
+<li>
+<p>If everything goes well, it shall output "X projects processed" where X is the total number of project folders.</p>
+</li>
+</ul>
+<p>The <code>projects</code> folder contains one sub folder for each project and 3 scripts:</p>
+<ul>
+<li>all</li>
+<li>mk</li>
+<li>run</li>
+</ul>
+<h4>
+<a id="user-content-the-all-script" class="anchor" href="#the-all-script" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>all</code> script</h4>
+<p>It applies a command to each project sequentially, stopping if any error happens.</p>
+<h4>
+<a id="user-content-the-mk-script" class="anchor" href="#the-mk-script" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>mk</code> script</h4>
+<p>It calls <code>make</code> for a particular project. Syntax:</p>
+<pre><code>mk &lt;project_name&gt; [make arguments] 
+</code></pre>
+<h4>
+<a id="user-content-the-run-script" class="anchor" href="#the-run-script" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>run</code> script</h4>
+<p>It calls <code>python</code> for a particular project. Syntax:</p>
+<pre><code>run &lt;project_name&gt; [project's script arguments]
+</code></pre>
+<p>The python script shall be exactly <code>&lt;project_name&gt;.py</code>.
+By default python is launched in a new terminal, this allows to close the new terminal if for some reason the script is not responsive. If you whish to execute within the main terminal, use the following syntax:</p>
+<pre><code>run --nowin &lt;project_name&gt; [project's script arguments]
+</code></pre>
+<h4>
+<a id="user-content-examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples</h4>
+<p>All examples are independant and assume the current directory is <code>projects</code>.</p>
+<ul>
+<li>
+<p>clean all projects:</p>
+<pre><code>  all mk clean
+</code></pre>
+</li>
+<li>
+<p>clean "project1" project:</p>
+<pre><code>  mk project1 clean
+</code></pre>
+</li>
+<li>
+<p>clean, build, load and run "project1":</p>
+<pre><code>  mk project1 clean run
+</code></pre>
+</li>
+<li>
+<p>clean, build, load and run "project1", second variant:</p>
+<pre><code>  mk project1 rebuild run
+</code></pre>
+</li>
+<li>
+<p>force to build and run with DEBUG defined:</p>
+<pre><code>  mk project1 rebuild run DEBUG=1
+</code></pre>
+</li>
+<li>
+<p>override arguments for the python script</p>
+<pre><code>  mk project1 run RUN_ARGS=first second third
+</code></pre>
+</li>
+<li>
+<p>launch python script directly, skipping make</p>
+<pre><code>  run project1 first second third
+</code></pre>
+</li>
+</ul>
+<p><g-emoji class="g-emoji" alias="heavy_check_mark" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji> <strong>NOTE</strong>: as projects are sub folders you can you tab completion. The trailing slash is tolated by the scripts.</p>
+<h3>
+<a id="user-content-eclipse-ide" class="anchor" href="#eclipse-ide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Eclipse IDE</h3>
+<p>Start eclipse using the dedicated "launch script".</p>
+<p>Choose any location for the workspace, it may be an existing workspace with existing projects.</p>
+<h4>
+<a id="user-content-importing-projects" class="anchor" href="#importing-projects" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Importing projects</h4>
+<p>The projects need to be imported in your workspace:</p>
+<ul>
+<li>File ⟶ Import ...
+<ul>
+<li>General ⟶ Existing Projects into Workspace, <code>Next &gt;</code>
+</li>
+<li>Select root directory: set this to the path of the <code>projects</code> folder</li>
+<li>Select all projects you want to import, leave other check boxes unchecked, <code>Finnish</code>
+</li>
+</ul>
+</li>
+</ul>
+<h4>
+<a id="user-content-launching-make-targets" class="anchor" href="#launching-make-targets" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Launching make targets</h4>
+<p>As we do everything via makefile, we need to see the makefile targets available for each project.</p>
+<ul>
+<li>Window ⟶ Show View ⟶ Make Target</li>
+</ul>
+<p>A window "Make Target" shall appear and display all projects which are open.</p>
+<p><g-emoji class="g-emoji" alias="grimacing" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f62c.png">😬</g-emoji> <strong>NOTE</strong>: If it is empty, you need to "open" a project first (a project can be "imported" but "closed"). To open a project, use the "Project Explorer" window and double click on the desired project.</p>
+<p>To launch a makefile target, use the "Make Target" window. Under the desired project you will see a list of targets, double click on the one you want to launch.</p>
+<h4>
+<a id="user-content-creating-a-new-project" class="anchor" href="#creating-a-new-project" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating a new project</h4>
+<p>The best way is to copy and past an existing project from the "Project Explorer":</p>
+<ul>
+<li>Copy the existing project by right click and select "Copy"</li>
+<li>Past the project by right click and selec "Past". Then the "Copy project" dialog pops up:
+<ul>
+<li>Set the new name</li>
+<li>Uncheck "Use default location"</li>
+<li>Browse to <code>projects</code> folder and create a folder with the same name as the new project
+<a href="/C:/Users/sriou/Documents/GitHub/SQN34x0/csp_root/generic/docs/eclipse_copy_project.png" target="_blank" rel="noopener noreferrer"><img src="/C:/Users/sriou/Documents/GitHub/SQN34x0/csp_root/generic/docs/eclipse_copy_project.png" alt="alt text" style="max-width:100%;"></a>
+</li>
+<li>Leave the file system to "default" and press <code>OK</code>
+</li>
+</ul>
+</li>
+<li>Use the <code>clean</code> target. If for some reason some files remain in the build directory, delete them manually (can be done under eclipse).</li>
+<li>Open the makefile and change the variable "PROJECT_NAME"</li>
+<li>Change the name of the python script to match the new project name</li>
+<li>Finally change the build directory to the new location:
+<ul>
+<li>Go to project properties (select the project and <kbd>Alt</kbd>+<kbd>Enter</kbd>)</li>
+<li><code>C/C++ Build</code></li>
+<li>Select the "Builder Settings" tab</li>
+<li>Click on <code>Workspace...</code> button and select the new project. For a project named "new_project" you shall see "${workspace_loc:/new_project}" as "Build directory"</li>
+<li>If the project as several configurations, do the same for all</li>
+</ul>
+</li>
+</ul>
+<h4>
+<a id="user-content-limitations" class="anchor" href="#limitations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Limitations</h4>
+<p>The console window does not allow you to send data to the device. If your python script requires user interaction, launch it using an external console created with <code>launch_shell</code>, see <a href="#user-content-command-line">Command line</a>.</p>
+</article></body></html>

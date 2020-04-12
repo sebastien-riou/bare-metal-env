@@ -1,3 +1,9 @@
+#Eclipse workspace folder
+RemoteSystemsTempFiles/
+
+#build folder
+build/
+
 # Prerequisites
 *.d
 

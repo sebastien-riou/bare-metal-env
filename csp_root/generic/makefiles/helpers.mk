@@ -25,8 +25,8 @@ __check_defined = \
 #	@:$(call check_defined2, BAR, ABOUT BAR)
 check_defined2 = \
     $(strip $(foreach 1,$1, \
-        $(call __check_defined,$1,$(strip $(value 2)))))
-__check_defined = \
+        $(call __check_defined2,$1,$(strip $(value 2)))))
+__check_defined2 = \
     $(if $(value $1),, \
         $(error Undefined $1$(if $2, ($2))$(if $(value @), \
                 required by target `$@')))

@@ -46,8 +46,6 @@ load_ihex=$(call $(sdk_long_name)_load_ihex,$1)
 $(info INFO: sdk_root              = $(sdk_root))
 $(info INFO: target_toolchain_path = $(target_toolchain_path))
 
-sources := $(call recurfind,src,*.c) $(call recurfind,src,*.cpp) $(call recurfind,src,*.S)
-$(info INFO: sources               = $(sources))
 
 
 # Experimental options: basically works but not compatible with the -Map option of the linker
@@ -67,28 +65,6 @@ build_artifact_name:=$(build_path)$(PROJECT_NAME)
 $(info INFO: build_path            = $(build_path))
 $(info INFO: build_artifact_name   = $(build_artifact_name))
 
-INC  += -I$(csp_target_root)includes -I$(csp_root)generic/includes
-#LIBS = 
-LIBSINC += -L$(csp_target_root)libs 
-LDSCRIPT ?= $(csp_target_root)ldscripts/flash.ld
-
-CFLAGS ?= -std=c99 -Wall -fmessage-length=0 -fstack-usage -Wno-unused-function -fdata-sections -ffunction-sections -flto 
-
-LDFLAGS ?= -Wl,--gc-sections -Wl,--relax -flto
-
-DEFS += -D$(sdk_short_name) -D$(sdk_long_name) -D$(sdk_generic_short_name) -D$(sdk_generic_long_name)
-
-ifeq ($(DEBUG),1)
-    CFLAGS += -g3 -O0
-endif
-
-ifeq ($(DEBUG),0)
-    CFLAGS += -g -Os
-endif
-
-ifeq ($(NOSTARTFILES),1)
-    LDFLAGS += -nostartfiles
-endif
 
 
 TARGET_OBJCOPY = $(target_toolchain_path)bin/$(TOOLCHAIN_PREFIX)-objcopy
@@ -96,9 +72,9 @@ TARGET_OBJDUMP = $(target_toolchain_path)bin/$(TOOLCHAIN_PREFIX)-objdump
 TARGET_CC=$(target_toolchain_path)bin/$(TOOLCHAIN_PREFIX)-gcc
 TARGET_ELF2SIZE=$(target_toolchain_path)bin/$(TOOLCHAIN_PREFIX)-size
 
-CFLAGS +=  -MMD -fstrict-volatile-bitfields -fno-strict-aliasing
-LDFLAGS += -L$(csp_target_root)ldscripts -L$(csp_root)generic/ldscripts -ffreestanding -Wl,-Bstatic,-T,$(LDSCRIPT),-Map,$(build_artifact_name).map
-#,--print-memory-usage
+sources := $(call recurfind,src,*.c) $(call recurfind,src,*.cpp) $(call recurfind,src,*.S)
+-include $(csp_target_root)makefiles/$(sdk_short_name)_sources_hook.mk
+$(info INFO: sources               = $(sources))
 
 OBJS_PATH=$(build_path)obj/
 OBJS := $(sources)
@@ -113,8 +89,34 @@ DEPS := $(patsubst %.o,%.d,$(OBJS))
 
 $(info INFO: TMP                   = $(TMP))
 
+INC  += -I$(csp_target_root)includes -I$(csp_root)generic/includes
+#LIBS = 
+LIBSINC += -L$(csp_target_root)libs 
+LDSCRIPT ?= $(csp_target_root)ldscripts/flash.ld
 
-all_outputs=$(build_artifact_name).elf $(build_artifact_name).ihex $(build_artifact_name).bin $(build_artifact_name).v $(build_artifact_name).disassembly  $(build_artifact_name).size $(build_artifact_name).naked.elf $(build_artifact_name).naked.size
+CFLAGS ?= -std=c99 -Wall -fmessage-length=0 -fstack-usage -Wno-unused-function -fdata-sections -ffunction-sections -flto 
+
+LDFLAGS ?= -Wl,--gc-sections -Wl,--relax -flto
+
+CFLAGS +=  -MMD -fstrict-volatile-bitfields -fno-strict-aliasing
+LDFLAGS += -L$(csp_target_root)ldscripts -L$(csp_root)generic/ldscripts -ffreestanding -Wl,-Bstatic,-T,$(LDSCRIPT),-Map,$(build_artifact_name).map
+#,--print-memory-usage
+
+DEFS += -DDEBUG=$(DEBUG) -D$(sdk_short_name) -D$(sdk_long_name) -D$(sdk_generic_short_name) -D$(sdk_generic_long_name)
+
+ifeq ($(DEBUG),1)
+    CFLAGS += -g3 -O0
+endif
+
+ifeq ($(DEBUG),0)
+    CFLAGS += -g -Os
+endif
+
+ifeq ($(NOSTARTFILES),1)
+    LDFLAGS += -nostartfiles
+endif
+
+all_outputs=$(build_artifact_name).elf $(build_artifact_name).ihex $(build_artifact_name).bin $(build_artifact_name).v $(build_artifact_name).disassembly  $(build_artifact_name).sections $(build_artifact_name).naked.elf $(build_artifact_name).naked.size
 
 build: $(all_outputs)
 
@@ -138,6 +140,9 @@ $(build_artifact_name).elf: $(OBJS)
 
 %.disassembly: %.elf
 	$(TARGET_OBJDUMP) -S -d $< > $@
+
+%.sections: %.elf
+	$(TARGET_OBJDUMP) -h -d $< > $@
 
 %.naked.elf: %.ihex
 	$(TARGET_OBJCOPY) -I ihex -O elf32-$(TOOLCHAIN_PREFIX) $< $@
@@ -173,7 +178,7 @@ clean:
 	rm -f $(build_artifact_name).bin
 	rm -f $(build_artifact_name).v
 	rm -f $(build_artifact_name).disassembly
-	rm -f $(build_artifact_name).size
+	rm -f $(build_artifact_name).sections
 	rm -f $(build_artifact_name).naked.size
 
 clean-all : clean

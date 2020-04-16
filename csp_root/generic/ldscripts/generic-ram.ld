@@ -6,15 +6,19 @@ OUTPUT_ARCH(...)
 MEMORY
 {
   ram          (rwx): ORIGIN = 0x000000, LENGTH = 20K
-  bootvector   (rx) : ORIGIN = 0x100000, LENGTH = 4
-  flash        (rx) : ORIGIN = 0x100004, LENGTH = 100K-4
 }
 */
-LD_FEATURE ("SANE_EXPR")
+
 SECTIONS
 {
-
    ENTRY( _start )
+   .start :
+    ALIGN(2)
+    {
+      *(.start)
+      *(.text.start)  
+    }
+
   /* Read-only sections, merged into text segment.  */
   .hash          : { *(.hash)             }
   .dynsym        : { *(.dynsym)           }
@@ -73,11 +77,6 @@ SECTIONS
   .rel.plt       : { *(.rel.plt)          }
   .rela.plt      : { *(.rela.plt)         }
 
-  .bootvector :
-  {
-    LONG(_start)
-  } > bootvector
-
   /* Internal text space.  */
   .text :
     ALIGN(2)
@@ -100,7 +99,6 @@ SECTIONS
        *(.dtors)
        __dtors_end = . ;
       . = ALIGN(2);
-      /* *startup*(.text)*/
       *(.text)
       . = ALIGN(2);
       *(.text.*)
@@ -118,7 +116,7 @@ SECTIONS
       *(.fini)
       . = ALIGN(128);
       _etext = .;
-    } > flash
+    } > ram
 
   .rodata :
   ALIGN(2)
@@ -126,45 +124,23 @@ SECTIONS
       . = ALIGN(2);
       *(.rodata .rodata.* .gnu.linkonce.r.*)
       *(.rodata1)
-      . = ALIGN(128);
       _etext = .;
-    }  > flash
+    }  > ram
 
   .vector_table :
     ALIGN(128)
     SUBALIGN(128)
-    ONLY_IF_RO
   {
      _vectors = .;
      KEEP(*(.vector_table));
      _evectors = .;
-     _etext = .;
-  } >flash
-
-  .vector_table :
-    ALIGN(128)
-    SUBALIGN(128)
-    ONLY_IF_RW
-  {
-     _vectors = .;
-     KEEP(*(.vector_table));
-     _evectors = .;
-  } >ram AT >flash
-
-
-  .ram_code   :
-    ALIGN (2)
-  {
-    _ram_code = . ;
-    *startup*(.ram_code)
-    KEEP(*(.ram_code));
-    _eram_code = .;
-  } >ram AT >flash
+  } >ram 
 
   .data   :
     ALIGN (2)
   {
     _data = DEFINED(_data)? _data : . ;
+    LONG(0)
     . = ALIGN(2);
     *(.data)
     . = ALIGN(2);
@@ -173,7 +149,7 @@ SECTIONS
     *(.gnu.linkonce.d*)
     . = ALIGN(2);
      _edata = . ;
-  } >ram AT >flash
+  } >ram 
 
   .bss :
     ALIGN (2)
@@ -188,8 +164,6 @@ SECTIONS
      _ebss = . ;
   } >ram
 
-
-
   .noinit :
     ALIGN (2)
   {
@@ -200,6 +174,7 @@ SECTIONS
      _end = . ;
   } >ram
 
+
   
   OVERLAY : NOCROSSREFS
   {
@@ -209,23 +184,11 @@ SECTIONS
       KEEP(*(.text_overlay0))
       __text_overlay0_vma_end = .;
     }
-  } >ram AT> flash
+  } >ram 
 
   _stack = ORIGIN(ram) + LENGTH(ram);
-  
-  PROVIDE (__stack_size = 0x1000);
-  .stack_check :
-  {
-    PROVIDE (__stack_base = .);
-    ASSERT ((_stack > (__stack_base + __stack_size)), "Error: No room left for the stack");
-  }
-
-  _stack_size_ok = (_stack > (__stack_base + __stack_size));
-  _ram_codelma  = LOADADDR(.ram_code) ;
   _datalma  = LOADADDR(.data) ;
   _vectorslma  = LOADADDR(.vector_table) ;
-
-  
 
   /* Addresses of IPs, help for disassembly readability */
   INCLUDE target_ips.ld

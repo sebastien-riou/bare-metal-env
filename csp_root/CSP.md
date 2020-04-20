@@ -4,9 +4,9 @@ This is a cross platform bare metal development environment which aims at being 
 
 ## Concepts
 
-The folder containing this file is referred as `CSP_ROOT`
+The folder containing this file is referred as `CSP_ROOT`. The folder directly under `CSP_ROOT` containing things specific to a chip is referred as `CSP_TARGET`.
 
-This package use several kind of targe identifiers, this section present them. 
+This package use several kind of target identifiers, this section present them. 
 A tool is able to test those identifiers via environment variables. Source code can do the same via defines. Those identifiers are also used to name the directories whithin the CSP package.
 
 ### SDK short names and long names
@@ -57,8 +57,8 @@ Create the following files:
 - .bin: the program binary image as a raw file
 - .v: file to load a memory in verilog simulator
 - .disassembly: disassembly of the full program
-- .size: size report including debug sections
-- .naked.size: actual size report
+- .sections: report of the various linker sections. Useful to check RAM consumption for example.
+- .naked.size: binary size report
 
 #### The `rebuild` target
 Short cut for `clean build`. The first thing to try when you get unexpected results. 
@@ -156,7 +156,7 @@ All examples are independant and assume the current directory is `projects`.
 :heavy_check_mark: **NOTE**: as projects are sub folders you can you tab completion. The trailing slash is tolated by the scripts.
 
 ### Eclipse IDE
-Start eclipse using the dedicated "launch script".
+Start eclipse using the dedicated `CSP_TARGET/launch_eclipse.bat`.
 
 Choose any location for the workspace, it may be an existing workspace with existing projects.
 

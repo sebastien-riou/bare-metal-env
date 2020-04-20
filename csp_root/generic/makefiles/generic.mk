@@ -33,7 +33,7 @@ sdk_generic_long_name=$(SDK_LONG_NAME_PREFIX)$(SDK_GENERIC_SHORT_NAME)
 csp_target_root=$(csp_root)$(sdk_generic_long_name)/
 
 -include $(csp_target_root)user_hook.mk
-
+$(shell )
 $(info INFO: DEBUG                 = $(DEBUG))
 $(info INFO: current working dir.  = $(shell pwd))
 $(info INFO: sdk_long_name         = $(sdk_long_name))

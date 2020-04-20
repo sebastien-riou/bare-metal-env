@@ -735,8 +735,8 @@ pre {
 <p>This is a cross platform bare metal development environment which aims at being usable from command line and from IDEs like Eclipse. An aditional goal is to observe the "DRY" principle ("Don't Repeat Yourself").</p>
 <h2>
 <a id="user-content-concepts" class="anchor" href="#concepts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Concepts</h2>
-<p>The folder containing this file is referred as <code>CSP_ROOT</code></p>
-<p>This package use several kind of targe identifiers, this section present them.
+<p>The folder containing this file is referred as <code>CSP_ROOT</code>. The folder directly under <code>CSP_ROOT</code> containing things specific to a chip is referred as <code>CSP_TARGET</code>.</p>
+<p>This package use several kind of target identifiers, this section present them.
 A tool is able to test those identifiers via environment variables. Source code can do the same via defines. Those identifiers are also used to name the directories whithin the CSP package.</p>
 <h3>
 <a id="user-content-sdk-short-names-and-long-names" class="anchor" href="#sdk-short-names-and-long-names" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SDK short names and long names</h3>
@@ -794,8 +794,8 @@ When trying out a new package, we recommend to try the command line first.</p>
 <li>.bin: the program binary image as a raw file</li>
 <li>.v: file to load a memory in verilog simulator</li>
 <li>.disassembly: disassembly of the full program</li>
-<li>.size: size report including debug sections</li>
-<li>.naked.size: actual size report</li>
+<li>.sections: report of the various linker sections. Useful to check RAM consumption for example.</li>
+<li>.naked.size: binary size report</li>
 </ul>
 <h4>
 <a id="user-content-the-rebuild-target" class="anchor" href="#the-rebuild-target" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The <code>rebuild</code> target</h4>
@@ -915,7 +915,7 @@ By default python is launched in a new terminal, this allows to close the new te
 <p><g-emoji class="g-emoji" alias="heavy_check_mark" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2714.png">✔️</g-emoji> <strong>NOTE</strong>: as projects are sub folders you can you tab completion. The trailing slash is tolated by the scripts.</p>
 <h3>
 <a id="user-content-eclipse-ide" class="anchor" href="#eclipse-ide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Eclipse IDE</h3>
-<p>Start eclipse using the dedicated "launch script".</p>
+<p>Start eclipse using the dedicated <code>CSP_TARGET/launch_eclipse.bat</code>.</p>
 <p>Choose any location for the workspace, it may be an existing workspace with existing projects.</p>
 <h4>
 <a id="user-content-importing-projects" class="anchor" href="#importing-projects" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Importing projects</h4>
@@ -950,7 +950,7 @@ By default python is launched in a new terminal, this allows to close the new te
 <li>Set the new name</li>
 <li>Uncheck "Use default location"</li>
 <li>Browse to <code>projects</code> folder and create a folder with the same name as the new project
-<a href="/C:/Users/sriou/Documents/GitHub/SQN34x0/csp_root/generic/docs/eclipse_copy_project.png" target="_blank" rel="noopener noreferrer"><img src="/C:/Users/sriou/Documents/GitHub/SQN34x0/csp_root/generic/docs/eclipse_copy_project.png" alt="alt text" style="max-width:100%;"></a>
+<a href="/C:/Users/sriou/Documents/GitHub/bare-metal-env/csp_root/generic/docs/eclipse_copy_project.png" target="_blank" rel="noopener noreferrer"><img src="/C:/Users/sriou/Documents/GitHub/bare-metal-env/csp_root/generic/docs/eclipse_copy_project.png" alt="alt text" style="max-width:100%;"></a>
 </li>
 <li>Leave the file system to "default" and press <code>OK</code>
 </li>

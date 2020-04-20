@@ -9,6 +9,7 @@ function unixpath() {
 function resolve_dir() {
         (builtin cd `dirname "${1/#~/$HOME}"`'/'`basename "${1/#~/$HOME}"` 2>/dev/null; if [ $? -eq 0 ]; then pwd; fi)
 }
+export CSP_TARGET=`resolve_dir $(pwd)`/
 export CSP_ROOT=`resolve_dir $(pwd)/..`/
 export SDK_ROOT=`unixpath $SDK_ROOT`
 export SDK_GENERIC_SHORT_NAME=`unixpath $SDK_GENERIC_SHORT_NAME`

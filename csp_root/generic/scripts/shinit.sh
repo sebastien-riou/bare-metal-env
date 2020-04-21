@@ -1,5 +1,5 @@
 #this file is meant to be sourced while the current directory is a child of csp_root
-export PATH=.:/usr/local/bin:/mingw/bin:/bin:$PATH
+export PATH=.:/usr/bin:/bin:$PATH
 function unixpath() {
     echo "$1" \
     | sed -r \

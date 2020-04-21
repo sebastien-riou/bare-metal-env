@@ -16,4 +16,27 @@ Files outside of this folder are for developpers of the framework.
 ### Initial integration
 File up your folder according to the template in the `template_csp`
 
+## Notes and links
 
+### Git and submodules:
+
+Git Pull with Submodule
+For a repo with submodules, we can pull all submodules using
+
+git submodule update --init --recursive
+for the first time. All submodules will be pulled down locally.
+
+To update submodules, we can use
+
+git submodule update --recursive --remote
+or simply
+
+git pull --recurse-submodules
+
+from: openmetric.org/til/programming/git-pull-with-submodule/
+
+## SSH guide
+https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/
+
+## ASCII
+https://www.rapidtables.com/convert/number/hex-to-ascii.html

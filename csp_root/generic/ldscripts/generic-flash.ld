@@ -100,7 +100,6 @@ SECTIONS
        *(.dtors)
        __dtors_end = . ;
       . = ALIGN(2);
-      /* *startup*(.text)*/
       *(.text)
       . = ALIGN(2);
       *(.text.*)
@@ -155,8 +154,8 @@ SECTIONS
   .ram_code   :
     ALIGN (2)
   {
-    _ram_code = . ;
-    *startup*(.ram_code)
+    _ram_code = DEFINED(_ram_code)? _ram_code : . ;
+    /*INCLUDE ram_code_section.ld*/
     KEEP(*(.ram_code));
     _eram_code = .;
   } >ram AT >flash
@@ -213,11 +212,11 @@ SECTIONS
 
   _stack = ORIGIN(ram) + LENGTH(ram);
   
-  PROVIDE (__stack_size = 0x1000);
+  PROVIDE (__stack_size = 0x400);
   .stack_check :
   {
     PROVIDE (__stack_base = .);
-    ASSERT ((_stack > (__stack_base + __stack_size)), "Error: No room left for the stack");
+    ASSERT ((_stack > (__stack_base + __stack_size)), "Error: Not enough room left for the stack");
   }
 
   _stack_size_ok = (_stack > (__stack_base + __stack_size));

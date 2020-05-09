@@ -155,7 +155,6 @@ SECTIONS
     ALIGN (2)
   {
     _ram_code = DEFINED(_ram_code)? _ram_code : . ;
-    /*INCLUDE ram_code_section.ld*/
     KEEP(*(.ram_code));
     _eram_code = .;
   } >ram AT >flash
@@ -223,8 +222,6 @@ SECTIONS
   _ram_codelma  = LOADADDR(.ram_code) ;
   _datalma  = LOADADDR(.data) ;
   _vectorslma  = LOADADDR(.vector_table) ;
-
-  
 
   /* Addresses of IPs, help for disassembly readability */
   INCLUDE target_ips.ld

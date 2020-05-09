@@ -96,7 +96,7 @@ LDSCRIPT ?= $(csp_target_root)ldscripts/flash.ld
 
 CFLAGS ?= -std=c99 -Wall -fmessage-length=0 -fstack-usage -Wno-unused-function -fdata-sections -ffunction-sections -flto 
 
-LDFLAGS ?= -Wl,--gc-sections -Wl,--relax -flto -Wl,--cref
+LDFLAGS ?= -Wl,--gc-sections -flto -Wl,--cref
 
 CFLAGS +=  -MMD -fstrict-volatile-bitfields -fno-strict-aliasing
 LDFLAGS += -L$(csp_target_root)ldscripts -L$(csp_root)generic/ldscripts -ffreestanding -Wl,-Bstatic,-T,$(LDSCRIPT),-Map,$(build_artifact_name).map
@@ -113,7 +113,7 @@ ifeq ($(DEBUG),1)
 endif
 
 ifeq ($(DEBUG),0)
-    CFLAGS += -g -Os
+    CFLAGS += -g -Os -fomit-frame-pointer
 endif
 
 ifeq ($(NOSTARTFILES),1)

@@ -29,11 +29,6 @@ for the first time. All submodules will be pulled down locally.
 To update submodules, we can use
 
 git submodule update --recursive --remote
-or simply
-
-git pull --recurse-submodules
-
-from: openmetric.org/til/programming/git-pull-with-submodule/
 
 ## SSH guide
 https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/

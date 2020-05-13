@@ -143,7 +143,7 @@ $(build_artifact_name).elf: $(OBJS)
 	$(TARGET_OBJCOPY) -O verilog $< $@
 
 %.disassembly: %.elf
-	$(TARGET_OBJDUMP) -S -d $< > $@
+	$(TARGET_OBJDUMP) --disassemble-zeroes --insn-width=6 -S -d $< > $@
 
 %.sections: %.elf
 	$(TARGET_OBJDUMP) -h -d $< > $@

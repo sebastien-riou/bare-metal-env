@@ -165,7 +165,7 @@ $(OBJS_PATH)%.o: %.cpp
 
 $(OBJS_PATH)%.o: %.S
 	mkdir -p $(dir $@)
-	$(TARGET_CC) -c $(CFLAGS) $(DEFS) -o $@ $< -D__ASSEMBLY__=1
+	$(TARGET_CC) -c $(CFLAGS) $(DEFS) $(INC) -o $@ $< -D__ASSEMBLY__=1
 
 $(OBJS_PATH)load.if.needed: $(all_outputs)
 	# load needed

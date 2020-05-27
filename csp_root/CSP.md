@@ -186,15 +186,15 @@ The best way is to copy and past an existing project from the "Project Explorer"
     + Browse to `projects` folder and create a folder with the same name as the new project
 ![alt text](./generic/docs/eclipse_copy_project.png)
     + Leave the file system to "default" and press ``OK``
-- Use the `clean` target. If for some reason some files remain in the build directory, delete them manually (can be done under eclipse).
-- Open the makefile and change the variable "PROJECT_NAME"
-- Change the name of the python script to match the new project name
-- Finally change the build directory to the new location:
+- Change the build directory to the new location:
     -  Go to project properties (select the project and <kbd>Alt</kbd>+<kbd>Enter</kbd>)
     -  ``C/C++ Build``
     -  Select the "Builder Settings" tab
     -  Click on ``Workspace...`` button and select the new project. For a project named "new_project" you shall see "${workspace_loc:/new_project}" as "Build directory"
     -  If the project as several configurations, do the same for all
+- Use the `clean` target. If for some reason some files remain in the build directory, delete them manually (can be done under eclipse).
+- Open the makefile and change the variable "PROJECT_NAME"
+- Change the name of the python script to match the new project name
 
 #### Limitations
 The console window does not allow you to send data to the device. If your python script requires user interaction, launch it using an external console created with `launch_shell`, see [Command line](#user-content-command-line).

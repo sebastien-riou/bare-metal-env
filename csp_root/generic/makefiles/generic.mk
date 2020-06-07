@@ -65,12 +65,10 @@ build_artifact_name:=$(build_path)$(PROJECT_NAME)
 $(info INFO: build_path            = $(build_path))
 $(info INFO: build_artifact_name   = $(build_artifact_name))
 
-
-
 TARGET_OBJCOPY = $(target_toolchain_path)bin/$(TOOLCHAIN_PREFIX)-objcopy
 TARGET_OBJDUMP = $(target_toolchain_path)bin/$(TOOLCHAIN_PREFIX)-objdump
-TARGET_CC=$(target_toolchain_path)bin/$(TOOLCHAIN_PREFIX)-gcc
-TARGET_ELF2SIZE=$(target_toolchain_path)bin/$(TOOLCHAIN_PREFIX)-size
+TARGET_CC      = $(target_toolchain_path)bin/$(TOOLCHAIN_PREFIX)-gcc
+TARGET_ELF2SIZE= $(target_toolchain_path)bin/$(TOOLCHAIN_PREFIX)-size
 
 sources := $(call recurfind,src,*.c) $(call recurfind,src,*.cpp) $(call recurfind,src,*.S)
 -include $(csp_target_root)makefiles/$(sdk_short_name)_sources_hook.mk
@@ -165,7 +163,7 @@ $(OBJS_PATH)%.o: %.cpp
 
 $(OBJS_PATH)%.o: %.S
 	mkdir -p $(dir $@)
-	$(TARGET_CC) -c $(CFLAGS) $(DEFS) $(INC) -o $@ $< -D__ASSEMBLY__=1
+	$(TARGET_CC) $(CFLAGS) $(DEFS) $(INC) -c -o $@ $< -D__ASSEMBLY__=1
 
 $(OBJS_PATH)load.if.needed: $(all_outputs)
 	# load needed
@@ -202,7 +200,7 @@ just_load:
 .PHONY: just_run 
 just_run:
 	python $(PROJECT_NAME).py $(RUN_ARGS)
-    
+
 load: build | just_load
 
 run: $(OBJS_PATH)load.if.needed | just_run

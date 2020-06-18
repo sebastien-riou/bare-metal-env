@@ -1,10 +1,17 @@
 # Changelog
 
+## [1.1.2] - 2020-06-18
+
+### Added
+- Python scripts to process ihex files
+
+### Changed
+- `generik.mk`: removed `--gap-fill` to generate smaller ihex files
+
 ## [1.1.1] - 2020-05-28
 
 ### Added
 - This file
-- vanilla SHA256 code
 
 ### Changed
 - `README.md`: Order of operations changed in the guide to create an eclipse project

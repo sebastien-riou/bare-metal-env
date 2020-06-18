@@ -20,7 +20,11 @@ CSP_ROOT ?= ../../../
 # Normalize all input paths
 csp_root = $(call fixpath,$(CSP_ROOT))
 
-$(info INFO: csp_root               = $(csp_root))
+$(info INFO: csp_root              = $(csp_root))
+
+export PATH := $(csp_root)generic/scripts:$(PATH)
+
+$(info INFO: PATH                  = $(PATH))
 
 -include $(csp_root)user_hook.mk
 
@@ -118,7 +122,7 @@ ifeq ($(NOSTARTFILES),1)
     LDFLAGS += -nostartfiles
 endif
 
-all_outputs=$(build_artifact_name).elf $(build_artifact_name).ihex $(build_artifact_name).bin $(build_artifact_name).v $(build_artifact_name).disassembly  $(build_artifact_name).sections $(build_artifact_name).naked.elf $(build_artifact_name).naked.size
+all_outputs=$(build_artifact_name).elf $(build_artifact_name).ihex $(build_artifact_name).mem_dump $(build_artifact_name).bin $(build_artifact_name).v $(build_artifact_name).disassembly  $(build_artifact_name).sections $(build_artifact_name).naked.elf $(build_artifact_name).naked.size
 
 build: $(all_outputs)
 
@@ -132,7 +136,8 @@ $(build_artifact_name).elf: $(OBJS)
 	$(TARGET_CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(LDEFS) $(LIBSINC) $(LIBS)
 
 %.ihex: %.elf
-	$(TARGET_OBJCOPY) -O ihex --gap-fill=0x00 $< $@
+#	$(TARGET_OBJCOPY) -O ihex --gap-fill=0xFF $< $@
+	$(TARGET_OBJCOPY) -O ihex $< $@
 
 %.bin: %.elf
 	$(TARGET_OBJCOPY) -O binary $< $@
@@ -153,6 +158,9 @@ $(build_artifact_name).elf: $(OBJS)
 	$(TARGET_ELF2SIZE) -A $< > $@
 	cat $@
 
+%.mem_dump: %.ihex
+	ihex2ascii.py $< > $@
+
 $(OBJS_PATH)%.o: %.c
 	mkdir -p $(dir $@)
 	$(TARGET_CC) $(CFLAGS) $(DEFS) $(INC) -c -o $@ $<
@@ -165,7 +173,7 @@ $(OBJS_PATH)%.o: %.S
 	mkdir -p $(dir $@)
 	$(TARGET_CC) $(CFLAGS) $(DEFS) $(INC) -c -o $@ $< -D__ASSEMBLY__=1
 
-$(OBJS_PATH)load.if.needed: $(all_outputs)
+$(OBJS_PATH)load.if.needed: $(build_artifact_name).ihex
 	# load needed
 	$(call load_ihex,$(build_artifact_name).ihex)
 	touch $(OBJS_PATH)load.if.needed
@@ -196,6 +204,7 @@ endif
 .PHONY: just_load
 just_load:
 	$(call load_ihex,$(build_artifact_name).ihex)
+	touch $(OBJS_PATH)load.if.needed
 
 .PHONY: just_run 
 just_run:

@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0] - 2020-07-28
+
+### Added
+- `ihexpad.py` script to pad ihex files
+
+### Changed
+- `generik.mk`: ihex post_process step
+
 ## [1.1.2] - 2020-06-18
 
 ### Added

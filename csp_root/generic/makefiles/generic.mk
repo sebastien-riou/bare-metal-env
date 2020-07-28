@@ -45,6 +45,7 @@ $(info INFO: csp_target_root       = $(csp_target_root))
 
 include $(csp_target_root)makefiles/$(sdk_short_name).mk
 include $(csp_target_root)makefiles/$(sdk_long_name).mk
+post_process_ihex=$(call $(sdk_long_name)_post_process_ihex,$1)
 load_ihex=$(call $(sdk_long_name)_load_ihex,$1)
 
 $(info INFO: sdk_root              = $(sdk_root))
@@ -138,6 +139,7 @@ $(build_artifact_name).elf: $(OBJS)
 %.ihex: %.elf
 #	$(TARGET_OBJCOPY) -O ihex --gap-fill=0xFF $< $@
 	$(TARGET_OBJCOPY) -O ihex $< $@
+	$(call post_process_ihex,$(build_artifact_name).ihex)
 
 %.bin: %.elf
 	$(TARGET_OBJCOPY) -O binary $< $@

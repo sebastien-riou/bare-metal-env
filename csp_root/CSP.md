@@ -1,4 +1,4 @@
-# Chip Support Package
+# Chip Support Package v1.4.0
 
 This is a cross platform bare metal development environment which aims at being usable from command line and from IDEs like Eclipse. An aditional goal is to observe the "DRY" principle ("Don't Repeat Yourself").
 

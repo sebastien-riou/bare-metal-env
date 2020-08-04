@@ -16,7 +16,7 @@ export SDK_GENERIC_SHORT_NAME=`unixpath $SDK_GENERIC_SHORT_NAME`
 export SDK_SHORT_NAME=`unixpath $SDK_SHORT_NAME`
 export SDK_LONG_NAME_PREFIX=`unixpath $SDK_LONG_NAME_PREFIX`
 
-export PATH=${CSP_ROOT}generic/scripts:$PATH
+export PATH=${CSP_TARGET}scripts:${CSP_ROOT}generic/scripts:$PATH
 
 
 if [ -d "$SDK_ROOT" ]; then

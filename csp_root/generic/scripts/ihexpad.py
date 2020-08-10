@@ -27,13 +27,23 @@ for sec in all_sections:
     logging.debug("0x%08X 0x%08X"%(sec[0],sec[1]-1))
 
 #copy all regular sections
+last=0
 for sec in all_sections:
+    addr = sec[0]
+    if addr % pad_size:
+        iho[addr] = 0xFF
+        while addr % pad_size:
+            iho[addr-1] = 0xFF
+            addr -= 1
+            if addr == last:
+                break
     for i in range(sec[0],sec[1]):
         iho[i]=ih[i]
     addr = sec[1]
     while addr % pad_size:
         iho[addr] = 0xFF
         addr += 1
+    last=sec[1]
 
 #copy start address
 logging.debug("start address: ",ih.start_addr)

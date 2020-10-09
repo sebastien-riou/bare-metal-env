@@ -31,7 +31,8 @@ fi
 if [ "" == "$python" ]; then
 
     os_is_linux
-    if [[ $? ]]; then
+    if [ $? -ne 0 ]
+    then
         python=python3
     else
         python=python

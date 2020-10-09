@@ -45,7 +45,7 @@ repo_root=os.path.join(dst,'bare-metal-env')
 
 for output_dir in [csp_root, repo_root]:
     if os.path.exists(output_dir):
-        shutil.rmtree(output_dir, onerror=del_rw) 
+        shutil.rmtree(output_dir, onerror=del_rw)
 
 print(shell('git clone '+repo))
 repo_csp_root = os.path.join(dst,'bare-metal-env','csp_root')
@@ -62,6 +62,7 @@ for sdk_long_name in sdk_long_names:
     print(shell('git clone '+repo))
     os.chdir(os.path.join(repo_csp_root,sdk_long_name))
     print(shell('git submodule update --init --recursive'))
+    print(shell('git submodule update --remote --merge'))
 
 print('Copy to release folder "%s"'%csp_root)
 shutil.copytree(src=repo_csp_root, dst=csp_root, symlinks=False, ignore=ignore)

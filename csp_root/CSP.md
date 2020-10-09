@@ -6,14 +6,14 @@ This is a cross platform bare metal development environment which aims at being 
 
 The folder containing this file is referred as `CSP_ROOT`. The folder directly under `CSP_ROOT` containing things specific to a chip is referred as `CSP_TARGET`.
 
-This package use several kind of target identifiers, this section present them. 
+This package use several kind of target identifiers, this section present them.
 A tool is able to test those identifiers via environment variables. Source code can do the same via defines. Those identifiers are also used to name the directories whithin the CSP package.
 
 ### SDK short names and long names
 A target device in this package is a particular CPU inside a particular SOC.
 A toolchain is usually tied to the CPU type and is agnosic to the SOC around however when it comes to londing a program in memory and communicated with the running program, the knownledge of the SOC does matter. To take this into account, a toolchain is identified using an "SDK short name" and a particular CPU in a particular SOC using an "SDK long name".
 - SDK short name: exact type and version of the targeted CPU.
-- SDK long name: 
+- SDK long name:
     - SOC part number
     - Instance number of the targeted CPU
     - SDK short name of the targeted CPU  
@@ -61,12 +61,12 @@ Create the following files:
 - .naked.size: binary size report
 
 #### The `rebuild` target
-Short cut for `clean build`. The first thing to try when you get unexpected results. 
+Short cut for `clean build`. The first thing to try when you get unexpected results.
 
 :grimacing: **NOTE**: Under some circumstances even `rebuild` may fail despite a perfectly valid source tree. This is due to the dependency tracking mechanism. Try `rebuild` a second time, if it fails again then the source tree may not be that perfect.
 
 #### The `load` target
-Load `.ihex` file in memory. It triggers the `build` target if needed. 
+Load `.ihex` file in memory. It triggers the `build` target if needed.
 
 If you want to just load the current `.ihex` without checking anything, use the `just_load` target.
 
@@ -83,10 +83,10 @@ If you want to just run the script without checking anything, use the `just_run`
 
 Environment verification:
 - Run the `launch_shell` script (`launch_shell.bat` for Windows user).
-    - You shall get a command line prompt and the current directory shall be the `projects` 
+    - You shall get a command line prompt and the current directory shall be the `projects`
 - Check the environment variables displayed.
-    * The first 3 depends on the location of the "launch script", if they don't match your expectation then you are using the wrong "launch script" 
-        - CSP_ROOT 
+    * The first 3 depends on the location of the "launch script", if they don't match your expectation then you are using the wrong "launch script"
+        - CSP_ROOT
         - SDK_LONG_NAME_PREFIX
         - SDK_GENERIC_SHORT_NAME
     * The last 2 already presented in this section
@@ -104,12 +104,12 @@ The `projects` folder contains one sub folder for each project and 3 scripts:
 - run
 
 #### The `all` script
-It applies a command to each project sequentially, stopping if any error happens. 
+It applies a command to each project sequentially, stopping if any error happens.
 
 #### The `mk` script
 It calls `make` for a particular project. Syntax:
 
-    mk <project_name> [make arguments] 
+    mk <project_name> [make arguments]
 
 #### The `run` script
 It calls `python` for a particular project. Syntax:
@@ -126,7 +126,7 @@ By default python is launched in a new terminal, this allows to close the new te
 All examples are independant and assume the current directory is `projects`.
 
 - clean all projects:
-        
+
         all mk clean
 
 - clean "project1" project:
@@ -171,7 +171,7 @@ The projects need to be imported in your workspace:
 As we do everything via makefile, we need to see the makefile targets available for each project.
 - Window ⟶ Show View ⟶ Make Target
 
-A window "Make Target" shall appear and display all projects which are open. 
+A window "Make Target" shall appear and display all projects which are open.
 
 :grimacing: **NOTE**: If it is empty, you need to "open" a project first (a project can be "imported" but "closed"). To open a project, use the "Project Explorer" window and double click on the desired project.
 
@@ -197,4 +197,4 @@ The best way is to copy and past an existing project from the "Project Explorer"
 - Change the name of the python script to match the new project name
 
 #### Limitations
-The console window does not allow you to send data to the device. If your python script requires user interaction, launch it using an external console created with `launch_shell`, see [Command line](#user-content-command-line).
+The console window does not allow you to send data to the device. If your python script requires user interaction, launch it using an external console created with `launch_shell`, see [Command line](#command-line).

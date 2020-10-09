@@ -94,11 +94,11 @@ DEPS := $(patsubst %.o,%.d,$(OBJS))
 $(info INFO: TMP                   = $(TMP))
 
 INC  += -I$(csp_target_root)includes -I$(csp_root)generic/includes
-#LIBS = 
-LIBSINC += -L$(csp_target_root)libs 
+#LIBS =
+LIBSINC += -L$(csp_target_root)libs
 LDSCRIPT ?= $(csp_target_root)ldscripts/flash.ld
 
-CFLAGS ?= -std=c99 -Wall -fmessage-length=0 -fstack-usage -Wno-unused-function -fdata-sections -ffunction-sections -flto 
+CFLAGS ?= -std=c99 -Wall -fmessage-length=0 -fstack-usage -Wno-unused-function -fdata-sections -ffunction-sections -flto
 
 LDFLAGS ?= -Wl,--gc-sections -flto -Wl,--cref
 
@@ -134,7 +134,7 @@ ifneq ($(filter clean,$(MAKECMDGOALS)),clean)
     endif
 endif
 
-$(build_artifact_name).elf: $(OBJS) 
+$(build_artifact_name).elf: $(OBJS)
 	$(TARGET_CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(LDEFS) $(LIBSINC) $(LIBS)
 
 %.ihex: %.elf
@@ -209,16 +209,16 @@ just_load:
 	$(call load_ihex,$(build_artifact_name).ihex)
 	touch $(OBJS_PATH)load.if.needed
 
-.PHONY: just_run 
+.PHONY: just_run
 just_run:
-	python $(PROJECT_NAME).py $(RUN_ARGS)
+	$(PYTHON) $(PROJECT_NAME).py $(RUN_ARGS)
 
 load: build | just_load
 
 run: $(OBJS_PATH)load.if.needed | just_run
-    
+
 #printvars: .PHONY
 #	@$(foreach V,$(sort $(.VARIABLES)),$(if $(filter-out default automatic,$(origin $V)),$(warning $V=$($V) ($(value $V)))))
 #@$(foreach V,$(sort $(.VARIABLES)),$(if $(filter-out environment% default automatic,$(origin $V)),$(warning $V=$($V) ($(value $V)))))
-    
+
 .SECONDARY: $(OBJS)

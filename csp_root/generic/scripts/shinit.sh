@@ -22,13 +22,29 @@ export PATH=${CSP_TARGET}scripts:${CSP_ROOT}generic/scripts:$PATH
 if [ -d "$SDK_ROOT" ]; then
   echo ""
 else
-  echo "ERROR: ${SDK_ROOT} not found. Can not continue."
+  echo "ERROR: SDK_ROOT defined as '${SDK_ROOT}' not found. Can not continue."
   read -n 1 -s -r -p "Press any key to exit"
   echo ""
   exit 1
 fi
 
-python $CSP_ROOT/generic/scripts/check_python_version.py
+if [ "" == "$python" ]; then
+
+    os_is_linux
+    if [[ $? ]]; then
+        python=python3
+    else
+        python=python
+    fi
+
+    #echo "ERROR: \$python not defined"
+    #read -n 1 -s -r -p "Press any key to exit"
+    #echo ""
+    #exit 1
+fi
+
+echo "Using '$python' as python"
+$python $CSP_ROOT/generic/scripts/check_python_version.py
 
 PYTHON_ERROR=$?
 
@@ -41,10 +57,13 @@ then
   #exit 1
 fi
 
+`$python $CSP_ROOT/generic/scripts/portable_config.py user_conf.py`
+
 echo "CSP_ROOT=$CSP_ROOT"
 echo "SDK_LONG_NAME_PREFIX  =$SDK_LONG_NAME_PREFIX"
 echo "SDK_GENERIC_SHORT_NAME=$SDK_GENERIC_SHORT_NAME"
 echo ""
 echo "SDK_SHORT_NAME        =$SDK_SHORT_NAME"
 echo "SDK_ROOT=$SDK_ROOT"
+
 cd projects

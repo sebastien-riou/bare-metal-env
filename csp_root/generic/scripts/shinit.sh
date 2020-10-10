@@ -28,14 +28,23 @@ else
   exit 1
 fi
 
-if [ "" == "$python" ]; then
+os_is_linux
+export OS_IS_LINUX=$?
+echo "OS_IS_LINUX='$OS_IS_LINUX'"
+if [ $OS_IS_LINUX -ne 0 ]
+then
+    export EXE_EXT=""
+else
+    export EXE_EXT=.exe
+fi
 
-    os_is_linux
-    if [ $? -ne 0 ]
+if [ "" == "$PYTHON" ]; then
+
+    if [ $OS_IS_LINUX -ne 0 ]
     then
-        python=python3
+        export PYTHON=python3
     else
-        python=python
+        export PYTHON=python
     fi
 
     #echo "ERROR: \$python not defined"
@@ -44,8 +53,8 @@ if [ "" == "$python" ]; then
     #exit 1
 fi
 
-echo "Using '$python' as python"
-$python $CSP_ROOT/generic/scripts/check_python_version.py
+echo "Using '$PYTHON' as python"
+$PYTHON $CSP_ROOT/generic/scripts/check_python_version.py
 
 PYTHON_ERROR=$?
 
@@ -58,7 +67,7 @@ then
   #exit 1
 fi
 
-`$python $CSP_ROOT/generic/scripts/portable_config.py user_conf.py`
+`$PYTHON $CSP_ROOT/generic/scripts/portable_config.py user_conf.py`
 
 echo "CSP_ROOT=$CSP_ROOT"
 echo "SDK_LONG_NAME_PREFIX  =$SDK_LONG_NAME_PREFIX"

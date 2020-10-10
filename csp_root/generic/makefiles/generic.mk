@@ -2,6 +2,8 @@
 # It is not supposed to be modified to suite a particular project
 # A project can customize some aspect of the build by defining some symbols and including this file in the end.
 
+$(info INFO: MAKE_VERSION          = $(MAKE_VERSION))
+$(info INFO: PYTHON                = $(PYTHON))
 
 DEBUG?=0
 

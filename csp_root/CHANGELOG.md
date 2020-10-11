@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- `os_is_linux` script: returns 1 if OS is Linux.
+- `os_dep.sh` script: set PYTHON, PIP and EXE_EXT environment variables depending on the OS.
+- `newterm` script: opens a new bash terminal.
+- `portable_config.py` script: allows to use a single config file for shell scripts and makefiles
+
 ## [1.4.0] - 2020-07-28
 
 ### Added

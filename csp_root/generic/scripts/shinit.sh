@@ -28,32 +28,8 @@ else
   exit 1
 fi
 
-os_is_linux
-export OS_IS_LINUX=$?
-echo "OS_IS_LINUX='$OS_IS_LINUX'"
-if [ $OS_IS_LINUX -ne 0 ]
-then
-    export EXE_EXT=""
-else
-    export EXE_EXT=.exe
-fi
+source $CSP_ROOT/generic/scripts/os_dep.sh
 
-if [ "" == "$PYTHON" ]; then
-
-    if [ $OS_IS_LINUX -ne 0 ]
-    then
-        export PYTHON=python3
-    else
-        export PYTHON=python
-    fi
-
-    #echo "ERROR: \$python not defined"
-    #read -n 1 -s -r -p "Press any key to exit"
-    #echo ""
-    #exit 1
-fi
-
-echo "Using '$PYTHON' as python"
 $PYTHON $CSP_ROOT/generic/scripts/check_python_version.py
 
 PYTHON_ERROR=$?

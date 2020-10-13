@@ -1,6 +1,6 @@
 #this file is meant to be sourced
 
-./os_is_linux
+os_is_linux
 export OS_IS_LINUX=$?
 echo "OS_IS_LINUX='$OS_IS_LINUX'"
 if [ $OS_IS_LINUX -ne 0 ]
@@ -18,7 +18,7 @@ if [ "" == "$PYTHON" ]; then
         export PIP=pip3
     else
         export PYTHON=python
-        export PIP=python
+        export PIP=pip
     fi
 
     #echo "ERROR: \$python not defined"

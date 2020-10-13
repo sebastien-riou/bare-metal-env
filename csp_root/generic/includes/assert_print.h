@@ -10,6 +10,13 @@
 
 // assume print.h is included before
 
+#ifndef ASSERT_FAIL_HANDLER
+  #define ASSERT_FAIL_HANDLER(f,l) do{\
+      println("exit");\
+      while(1);\
+    }while(0)
+#endif
+
 #define ASSERT_EQ( a,b,len) do{assert_eq (a,b,len,__FILE__,__LINE__);}while(0)
 #define ASSERT_NEQ(a,b,len) do{assert_neq(a,b,len,__FILE__,__LINE__);}while(0)
 #define ASSERT_EQ_VAL(a,b)  do{assert_eq_val (a,b,__FILE__,__LINE__);}while(0)
@@ -33,8 +40,7 @@ static void assert_core(const void *a,const void *b, unsigned int len, const cha
     println("enter_SBL");
     sbl_main();
     #endif
-    println("exit");
-    while(1);
+    ASSERT_FAIL_HANDLER(f,l);
     (void)assert_remove_unused_warning;
   }
 }

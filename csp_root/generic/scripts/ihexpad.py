@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#do not use shebang here. this is troublesome on some windows systems
+
 import os
 import sys
 import logging
@@ -48,6 +49,5 @@ for sec in all_sections:
 #copy start address
 logging.debug("start address: ",ih.start_addr)
 iho.start_addr = ih.start_addr
-            
-iho.write_hex_file(ihexf+".pad.ihex")
 
+iho.write_hex_file(ihexf+".pad.ihex")

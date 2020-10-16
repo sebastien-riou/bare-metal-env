@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#do not use shebang here. this is troublesome on some windows systems
+
 import os
 import sys
 from intelhex import IntelHex
@@ -32,7 +33,7 @@ size=high_addr-low_addr
 if size>10*1024*1024:
     print("image is larger than 10MB, give up")
     exit(-1)
-    
+
 #copy all regular sections
 print("%08X: "%(low_addr),end="")
 for i in range(low_addr,high_addr):

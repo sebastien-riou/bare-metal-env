@@ -104,12 +104,14 @@ CFLAGS ?= -std=c99 -Wall -fmessage-length=0 -fstack-usage -Wno-unused-function -
 
 LDFLAGS ?= -Wl,--gc-sections -flto -Wl,--cref
 
+SYMBOLS ?= ""
+
 CFLAGS +=  -MMD -fstrict-volatile-bitfields -fno-strict-aliasing
 LDFLAGS += -L$(csp_target_root)ldscripts -L$(csp_root)generic/ldscripts -ffreestanding -Wl,-Bstatic,-T,$(LDSCRIPT),-Map,$(build_artifact_name).map
 #,--print-memory-usage
 
 ifdef $(STACKSIZE)
-LDFLAGS+=-Wl,--defsym=__stack_size=$(STACKSIZE)
+		LDFLAGS+=-Wl,--defsym=__stack_size=$(STACKSIZE)
 endif
 
 DEFS += -DDEBUG=$(DEBUG) -D$(sdk_short_name) -D$(sdk_long_name) -D$(sdk_generic_short_name) -D$(sdk_generic_long_name)
@@ -137,7 +139,7 @@ ifneq ($(filter clean,$(MAKECMDGOALS)),clean)
 endif
 
 $(build_artifact_name).elf: $(OBJS)
-	$(TARGET_CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(LDEFS) $(LIBSINC) $(LIBS)
+	$(TARGET_CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(LDEFS) $(LIBSINC) $(LIBS) $(SYMBOLS)
 
 %.ihex: %.elf
 #	$(TARGET_OBJCOPY) -O ihex --gap-fill=0xFF $< $@
@@ -164,7 +166,7 @@ $(build_artifact_name).elf: $(OBJS)
 	cat $@
 
 %.mem_dump: %.ihex
-	ihex2ascii.py $< > $@
+	$(PYTHON) $(csp_root)generic/scripts/ihex2ascii.py $< > $@
 
 $(OBJS_PATH)%.o: %.c
 	mkdir -p $(dir $@)

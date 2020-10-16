@@ -1,3 +1,4 @@
+#do not use shebang here. this is troublesome on some windows systems
 #portable environment variable setting using python for conf file
 
 #meant to be used like this:

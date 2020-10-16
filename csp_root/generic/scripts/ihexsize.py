@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#do not use shebang here. this is troublesome on some windows systems
+
 import os
 import sys
 import logging

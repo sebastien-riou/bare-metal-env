@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#do not use shebang here. this is troublesome on some windows systems
+
 import os
 import sys
 from intelhex import IntelHex
@@ -36,7 +37,7 @@ for sec in sections:
 #copy start address
 #print("start address: ",ih.start_addr)
 iho.start_addr = ih.start_addr
-            
+
 iho.write_hex_file(ihexf+".phy.ihex")
 
 all_sections = iho.segments()

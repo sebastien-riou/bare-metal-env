@@ -2,7 +2,7 @@
 
 This is a cross platform bare metal development environment which aims at being usable from command line and from IDEs like Eclipse. An aditional goal is to observe the "DRY" principle ("Don't Repeat Yourself").
 
-The stuff for users is within `csp_root` folder. 
+The stuff for users is within `csp_root` folder.
 Files outside of this folder are for developpers of the framework.
 
 ## How to develop a CSP ?
@@ -23,12 +23,13 @@ File up your folder according to the template in the `template_csp`
 Git Pull with Submodule
 For a repo with submodules, we can pull all submodules using
 
-git submodule update --init --recursive
+`git submodule update --init --recursive`
+
 for the first time. All submodules will be pulled down locally.
 
 To update submodules, we can use
 
-git submodule update --recursive --remote
+`git submodule update --remote --merge`
 
 ## SSH guide
 https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/

@@ -200,6 +200,11 @@ clean:
 
 clean-all : clean
 
+.PHONY: erase_build
+#shall no be used with other targets like build/rebuild
+erase_build:
+	rm -rf $(build_path)
+
 rebuild: clean-all | build
 
 ifeq ($(REBUILD_BY_DEFAULT),1)

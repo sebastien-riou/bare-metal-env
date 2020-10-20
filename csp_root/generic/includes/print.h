@@ -15,10 +15,14 @@
 #include <stdbool.h>
 #include <string.h>
 
-static void print(const char*msg){print_impl(msg);}
+static bool print_enabled=1;
+static void print_cfg(bool enable){print_enabled=enable;}
+
+static void print(const char*msg){if(!print_enabled) return;print_impl(msg);}
 
 
 static void print_uint_as_hex(uint64_t num, unsigned int nhexdigits){
+  if(!print_enabled) return;
   const char hex[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
   uint8_t car;
@@ -36,6 +40,7 @@ static void print_uint_as_hex(uint64_t num, unsigned int nhexdigits){
 }
 
 static void print_uint_as_dec(uint64_t num, unsigned int ndecdigits){
+  if(!print_enabled) return;
   char res[21];
   char* resptr = &res[20];
   *resptr=0;
@@ -57,67 +62,103 @@ static void print_uint_as_dec(uint64_t num, unsigned int ndecdigits){
   print(resptr);
 }
 
-static void println(const char*msg){print(msg);print("\n");}
+static void println(const char*msg){
+  if(!print_enabled) return;
+  print(msg);print("\n");
+}
 static void print8x(const char*msg1,uint8_t val,const char*msg2){
+  if(!print_enabled) return;
   if(msg1) print(msg1);
   print_uint_as_hex(val,2);
   if(msg2) print(msg2);
 }
-static void println8x(const char*msg1,uint8_t val){print8x(msg1,val,"\n");}
+static void println8x(const char*msg1,uint8_t val){
+  if(!print_enabled) return;
+  print8x(msg1,val,"\n");
+}
 
 static void print8d(const char*msg1,uint32_t val,const char*msg2){
+  if(!print_enabled) return;
   if(msg1) print(msg1);
   print_uint_as_dec(val,3);
   if(msg2) print(msg2);
 }
-static void println8d(const char*msg1,uint32_t val){print8d(msg1,val,"\n");}
+static void println8d(const char*msg1,uint32_t val){
+  if(!print_enabled) return;
+  print8d(msg1,val,"\n");
+}
 
 
 static void print16x(const char*msg1,uint16_t val,const char*msg2){
+  if(!print_enabled) return;
   if(msg1) print(msg1);
   print_uint_as_hex(val,4);
   if(msg2) print(msg2);
 }
-static void println16x(const char*msg1,uint16_t val){print16x(msg1,val,"\n");}
+static void println16x(const char*msg1,uint16_t val){
+  if(!print_enabled) return;
+  print16x(msg1,val,"\n");
+}
 
 static void print16d(const char*msg1,uint32_t val,const char*msg2){
+  if(!print_enabled) return;
   if(msg1) print(msg1);
   print_uint_as_dec(val,5);
   if(msg2) print(msg2);
 }
-static void println16d(const char*msg1,uint32_t val){print16d(msg1,val,"\n");}
+static void println16d(const char*msg1,uint32_t val){
+  if(!print_enabled) return;
+  print16d(msg1,val,"\n");
+}
 
 
 static void print32x(const char*msg1,uint32_t val,const char*msg2){
+  if(!print_enabled) return;
   if(msg1) print(msg1);
   print_uint_as_hex(val,8);
   if(msg2) print(msg2);
 }
-static void println32x(const char*msg1,uint32_t val){print32x(msg1,val,"\n");}
+static void println32x(const char*msg1,uint32_t val){
+  if(!print_enabled) return;
+  print32x(msg1,val,"\n");
+}
 
 static void print32d(const char*msg1,uint32_t val,const char*msg2){
+  if(!print_enabled) return;
   if(msg1) print(msg1);
   print_uint_as_dec(val,10);
   if(msg2) print(msg2);
 }
-static void println32d(const char*msg1,uint32_t val){print32d(msg1,val,"\n");}
+static void println32d(const char*msg1,uint32_t val){
+  if(!print_enabled) return;
+  print32d(msg1,val,"\n");
+}
 
 static void print64x(const char*msg1,uint64_t val,const char*msg2){
+  if(!print_enabled) return;
   if(msg1) print(msg1);
   print_uint_as_hex(val,16);
   if(msg2) print(msg2);
 }
-static void println64x(const char*msg1,uint64_t val){print64x(msg1,val,"\n");}
+static void println64x(const char*msg1,uint64_t val){
+  if(!print_enabled) return;
+  print64x(msg1,val,"\n");
+}
 
 static void print64d(const char*msg1,uint32_t val,const char*msg2){
+  if(!print_enabled) return;
   if(msg1) print(msg1);
   print_uint_as_dec(val,10);
   if(msg2) print(msg2);
 }
-static void println64d(const char*msg1,uint32_t val){print64d(msg1,val,"\n");}
+static void println64d(const char*msg1,uint32_t val){
+  if(!print_enabled) return;
+  print64d(msg1,val,"\n");
+}
 
 static void print_bytes_sep(const char*msg1,const void*const buf,unsigned int size, const char*msg2, const char*const separator){
-const uint8_t*const buf8=(const uint8_t*const)buf;
+  if(!print_enabled) return;
+  const uint8_t*const buf8=(const uint8_t*const)buf;
   if(msg1) print(msg1);
   const char*sep=0;
   for(unsigned int i=0;i<size;i++){
@@ -128,17 +169,26 @@ const uint8_t*const buf8=(const uint8_t*const)buf;
 }
 
 static void print_bytes(const char*msg1,const void*const buf,unsigned int size, const char*msg2){
+  if(!print_enabled) return;
   print_bytes_sep(msg1,buf,size,msg2," ");
 }
-static void println_bytes(const char*msg1,const void*const buf,unsigned int size){print_bytes(msg1,buf,size,"\n");}
+static void println_bytes(const char*msg1,const void*const buf,unsigned int size){
+  if(!print_enabled) return;
+  print_bytes(msg1,buf,size,"\n");
+}
 
 static void print_bytes_0x(const char*msg1,const void*const buf,unsigned int size, const char*msg2){
+  if(!print_enabled) return;
   print(msg1);
   print_bytes_sep("0x",buf,size,msg2,",0x");
 }
-static void println_bytes_0x(const char*msg1,const void*const buf,unsigned int size){print_bytes_0x(msg1,buf,size,"\n");}
+static void println_bytes_0x(const char*msg1,const void*const buf,unsigned int size){
+  if(!print_enabled) return;
+  print_bytes_0x(msg1,buf,size,"\n");
+}
 
 static void print_array32x_0xln(const void*const buf, unsigned int n_elements){
+  if(!print_enabled) return;
   const uint32_t *elements=(const uint32_t*)buf;
   for(unsigned int i=0;i<n_elements;i++){
       print32d("",i,"");

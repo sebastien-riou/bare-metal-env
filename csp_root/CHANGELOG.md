@@ -1,6 +1,10 @@
 # Changelog
 
-## [Unreleased]
+## [1.5.0] - 2020-10-19
+
+### Changed
+- `generic.mk`: `erase_build` target. It erases the `build` folder completely. It shall not be used with other targets.
+- python scripts: "shebang" line removed, this cause some problems on some windows systems even though the script is called by python directly.
 
 ### Added
 - `os_is_linux` script: returns 1 if OS is Linux.

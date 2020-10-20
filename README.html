@@ -21,60 +21,32 @@
   }
 </style>
 </head>
-<body><div id="readme" class="container"><article class="markdown-body entry-content"><h1 id="changelog">Changelog</h1>
-<h2 id="-1-5-0-2020-10-19">[1.5.0] - 2020-10-19</h2>
-<h3 id="changed">Changed</h3>
+<body><div id="readme" class="container"><article class="markdown-body entry-content"><h1 id="bare-metal-env">bare-metal-env</h1>
+<p>This is a cross platform bare metal development environment which aims at being usable from command line and from IDEs like Eclipse. An aditional goal is to observe the &quot;DRY&quot; principle (&quot;Don&apos;t Repeat Yourself&quot;).</p>
+<p>The stuff for users is within <code>csp_root</code> folder.
+Files outside of this folder are for developpers of the framework.</p>
+<h2 id="how-to-develop-a-csp-">How to develop a CSP ?</h2>
+<h3 id="git-setup">Git setup</h3>
 <ul>
-<li><code>generic.mk</code>: <code>erase_build</code> target. It erases the <code>build</code> folder completely. It shall not be used with other targets.</li>
-<li>python scripts: &quot;shebang&quot; line removed, this cause some problems on some windows systems even though the script is called by python directly.</li>
+<li>define the &quot;Generic SDK long name&quot; for your CSP</li>
+<li>Create a repo with that name, all in UPPER case</li>
+<li>clone this repo</li>
+<li>within <code>csp_root</code>, clone your repo</li>
 </ul>
-<h3 id="added">Added</h3>
-<ul>
-<li><code>os_is_linux</code> script: returns 1 if OS is Linux.</li>
-<li><code>os_dep.sh</code> script: set PYTHON, PIP and EXE_EXT environment variables depending on the OS.</li>
-<li><code>newterm</code> script: opens a new bash terminal.</li>
-<li><code>portable_config.py</code> script: allows to use a single config file for shell scripts and makefiles</li>
-</ul>
-<h2 id="-1-4-0-2020-07-28">[1.4.0] - 2020-07-28</h2>
-<h3 id="added">Added</h3>
-<ul>
-<li><code>ihexpad.py</code> script to pad ihex files</li>
-</ul>
-<h3 id="changed">Changed</h3>
-<ul>
-<li><code>generik.mk</code>: ihex post_process step</li>
-</ul>
-<h2 id="-1-1-2-2020-06-18">[1.1.2] - 2020-06-18</h2>
-<h3 id="added">Added</h3>
-<ul>
-<li>Python scripts to process ihex files</li>
-</ul>
-<h3 id="changed">Changed</h3>
-<ul>
-<li><code>generik.mk</code>: removed <code>--gap-fill</code> to generate smaller ihex files</li>
-</ul>
-<h2 id="-1-1-1-2020-05-28">[1.1.1] - 2020-05-28</h2>
-<h3 id="added">Added</h3>
-<ul>
-<li>This file</li>
-</ul>
-<h3 id="changed">Changed</h3>
-<ul>
-<li><code>README.md</code>: Order of operations changed in the guide to create an eclipse project</li>
-<li><code>generik.mk</code>: include directories added to assembly files build</li>
-</ul>
-<h2 id="-1-1-0-2020-05-22">[1.1.0] - 2020-05-22</h2>
-<h3 id="added">Added</h3>
-<ul>
-<li>vanilla SHA256 code</li>
-</ul>
-<h3 id="changed">Changed</h3>
-<ul>
-<li><code>generik.mk</code>: tweak to generate better disassembly log</li>
-<li><code>generik-flash.ld</code></li>
-</ul>
-<h2 id="-1-0-0-2020-04-20">[1.0.0] - 2020-04-20</h2>
-<p>Initial release</p>
+<h3 id="initial-integration">Initial integration</h3>
+<p>File up your folder according to the template in the <code>template_csp</code></p>
+<h2 id="notes-and-links">Notes and links</h2>
+<h3 id="git-and-submodules-">Git and submodules:</h3>
+<p>Git Pull with Submodule
+For a repo with submodules, we can pull all submodules using</p>
+<p><code>git submodule update --init --recursive</code></p>
+<p>for the first time. All submodules will be pulled down locally.</p>
+<p>To update submodules, we can use</p>
+<p><code>git submodule update --remote --merge</code></p>
+<h2 id="ssh-guide">SSH guide</h2>
+<p><a href="https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/">https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/</a></p>
+<h2 id="ascii">ASCII</h2>
+<p><a href="https://www.rapidtables.com/convert/number/hex-to-ascii.html">https://www.rapidtables.com/convert/number/hex-to-ascii.html</a></p>
 </article></div><div style="background-color: #b4b2b2;width: 50px;height:50px;line-height: 50px;text-align: center;position: fixed;bottom: 10px;right: 10px;padding-top:5px;" onclick="document.documentElement.scrollTop = document.body.scrollTop =0;">
   <svg t="1533629773982" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1035" xlink="http://www.w3.org/1999/xlink" width="40" height="40"><defs><style type="text/css">@font-face { font-family: uc-nexus-iconfont; src: url("chrome-extension://pogijhnlcfmcppgimcaccdkmbedjkmhi/res/font_9qmmi8b8jsxxbt9.woff") format("woff"), url("chrome-extension://pogijhnlcfmcppgimcaccdkmbedjkmhi/res/font_9qmmi8b8jsxxbt9.ttf") format("truetype"); }
   </style></defs><path d="M536.255427 195.182354c-7.804756-7.804756-17.966187-11.615549-28.311813-11.615549-9.43693 0-18.874883 3.449565-26.496467 10.163477-2.360767 1.452071-4.356214 3.267417-6.352685 5.262864L218.47792 455.611735c-15.607466 15.60542-15.607466 40.834011 0 56.43943 15.607466 15.607466 41.558511 15.607466 57.167001 0l193.46013-192.733583 0 600.526219c0 22.1423 17.787108 39.927361 39.927361 39.927361 22.140253 0 39.927361-17.785062 39.927361-39.927361L548.959773 319.317583 737.15704 508.422522c15.607466 15.607466 40.469714 15.607466 56.078203 0 15.607466-15.607466 15.425318-40.834011-0.182149-56.441477L536.255427 195.182354 536.255427 195.182354z" p-id="1036" fill="#333"/><path d="M101.784174 143.097092l816.674071 0c22.140253 0 39.925315-17.785062 39.925315-39.927361 0-22.140253-17.784038-39.925315-39.925315-39.925315L101.784174 63.244416c-22.140253 0-39.927361 17.785062-39.927361 39.925315C61.856813 125.31203 79.643921 143.097092 101.784174 143.097092L101.784174 143.097092z" p-id="1037" fill="#333"/></svg>

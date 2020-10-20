@@ -28,6 +28,7 @@ static void assert_core(const void *a,const void *b, unsigned int len, const cha
   int status = memcmp(a, b, len);
   int match = status == 0;
   if ( match != eq ){
+    print_cfg(1);//force printing
     println("");
     println("ERROR: assert failed");
     if(eq) println("expected equality");

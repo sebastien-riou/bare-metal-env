@@ -1,0 +1,4 @@
+#!/bin/bash
+
+py=`which ${PYTHON}`
+$py ${CSP_ROOT}/generic/scripts/release.py

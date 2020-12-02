@@ -110,8 +110,8 @@ CFLAGS +=  -MMD -fstrict-volatile-bitfields -fno-strict-aliasing
 LDFLAGS += -L$(csp_target_root)ldscripts -L$(csp_root)generic/ldscripts -ffreestanding -Wl,-Bstatic,-T,$(LDSCRIPT),-Map,$(build_artifact_name).map
 #,--print-memory-usage
 
-ifdef $(STACKSIZE)
-		LDFLAGS+=-Wl,--defsym=__stack_size=$(STACKSIZE)
+ifdef STACKSIZE
+		LDFLAGS += -Wl,--defsym=__stack_size=$(STACKSIZE)
 endif
 
 DEFS += -DDEBUG=$(DEBUG) -D$(sdk_short_name) -D$(sdk_long_name) -D$(sdk_generic_short_name) -D$(sdk_generic_long_name)

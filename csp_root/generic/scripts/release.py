@@ -5,11 +5,21 @@ import sys
 import stat
 import shutil
 
+src_toolchain="/home/sdk-support/releases/toolchains/csp"
+serv="SERV100"
+
+def get_user():
+    global user_serv
+    if(len(sys.argv) > 1):
+        user_serv = sys.argv[1]
+    else:
+        #user_serv = 'sdk-support'
+        user_serv = 'sdk-support'
+
 def shell(cmd):
     stream = os.popen(cmd)
     output = stream.read()
     return output
-
 
 def del_rw(action, name, exc):
     os.chmod(name, stat.S_IWRITE)
@@ -28,14 +38,26 @@ def ignore(dir,files):
             ignored.append(f)
     return ignored
 
+def get_toolchain(user, srv, src, dst):
+    if os.path.exists(dst):
+        shutil.rmtree(os.path.realpath(dst))
+
+    os.mkdir(os.path.realpath(dst))
+    cmd="scp -r "+user+"@"+srv+":"+src+"/tam16exv2-mingw32 "+os.path.realpath(dst)
+    print(shell(cmd))
+    # cmd="scp -r "+user+"@"+srv+":"+src+"/* "+os.path.realpath(dst)  => pb with tam16exv2-linux64
+    # print(shell(cmd))
+
 dst=os.environ['TMP']
-if len(sys.argv)>1:
-    dst=sys.argv[1]
+if len(sys.argv)>2:
+    dst=sys.argv[2]
 dst=os.path.realpath(dst)
 csp_root=os.path.join(dst,'csp_root')
 
-src_csp_root=os.path.realpath(os.environ['CSP_ROOT'])
+dst_toolchain=os.path.join(dst,'bare-metal-env/csp_root/SQN34X0VXI0_TESIC_0400XRXX/dependencies/tam16exv2')
 
+src_csp_root=os.path.realpath(os.environ['CSP_ROOT'])
+print(dst,csp_root,src_csp_root)
 os.chdir(src_csp_root)
 repo = shell('git config --get remote.origin.url')
 print(repo)
@@ -59,8 +81,13 @@ for sdk_long_name in sdk_long_names:
     os.chdir(src_csp_target_root)
     repo = shell('git config --get remote.origin.url')
     os.chdir(repo_csp_root)
-    print(shell('git clone '+repo))
+    print(shell('git clone -b WIP-TAM16-OUTSIDE '+repo))
+    # print(shell('git clone '+repo))
     os.chdir(os.path.join(repo_csp_root,sdk_long_name))
+
+    get_user()
+    get_toolchain(user_serv, serv, src_toolchain, dst_toolchain)
+
     print(shell('git submodule update --init --recursive'))
     print(shell('git submodule update --remote --merge'))
 

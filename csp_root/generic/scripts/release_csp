@@ -1,4 +1,4 @@
 #!/bin/bash
 
 py=`which ${PYTHON}`
-$py ${CSP_ROOT}/generic/scripts/release.py
+$py ${CSP_ROOT}/generic/scripts/release.py $1 $2

@@ -5,16 +5,7 @@ import sys
 import stat
 import shutil
 
-src_toolchain="/home/sdk-support/releases/toolchains/csp"
-serv="SERV100"
-
-def get_user():
-    global user_serv
-    if(len(sys.argv) > 1):
-        user_serv = sys.argv[1]
-    else:
-        #user_serv = 'sdk-support'
-        user_serv = 'sdk-support'
+src_toolchain='"S:\\5.Projet\\03-Application\\CSP\\Toolchains"'
 
 def shell(cmd):
     stream = os.popen(cmd)
@@ -38,19 +29,20 @@ def ignore(dir,files):
             ignored.append(f)
     return ignored
 
-def get_toolchain(user, srv, src, dst):
+def get_toolchain(src, dst):
     if os.path.exists(dst):
         shutil.rmtree(os.path.realpath(dst))
 
     os.mkdir(os.path.realpath(dst))
-    cmd="scp -r "+user+"@"+srv+":"+src+"/tam16exv2-mingw32 "+os.path.realpath(dst)
+
+    path='"'+os.path.realpath(dst)+'"'
+    print("Copy from "+src+" ...")
+    cmd="xcopy "+src+" "+os.path.realpath(dst)+" /e"
     print(shell(cmd))
-    # cmd="scp -r "+user+"@"+srv+":"+src+"/* "+os.path.realpath(dst)  => pb with tam16exv2-linux64
-    # print(shell(cmd))
 
 dst=os.environ['TMP']
-if len(sys.argv)>2:
-    dst=sys.argv[2]
+if len(sys.argv)>1:
+    dst=sys.argv[1]
 dst=os.path.realpath(dst)
 csp_root=os.path.join(dst,'csp_root')
 
@@ -85,8 +77,7 @@ for sdk_long_name in sdk_long_names:
     # print(shell('git clone '+repo))
     os.chdir(os.path.join(repo_csp_root,sdk_long_name))
 
-    get_user()
-    get_toolchain(user_serv, serv, src_toolchain, dst_toolchain)
+    get_toolchain(src_toolchain, dst_toolchain)
 
     print(shell('git submodule update --init --recursive'))
     print(shell('git submodule update --remote --merge'))

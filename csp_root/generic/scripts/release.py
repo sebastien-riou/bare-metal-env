@@ -73,8 +73,7 @@ for sdk_long_name in sdk_long_names:
     os.chdir(src_csp_target_root)
     repo = shell('git config --get remote.origin.url')
     os.chdir(repo_csp_root)
-    print(shell('git clone -b WIP-TAM16-OUTSIDE '+repo))
-    # print(shell('git clone '+repo))
+    print(shell('git clone '+repo))
     os.chdir(os.path.join(repo_csp_root,sdk_long_name))
 
     get_toolchain(src_toolchain, dst_toolchain)

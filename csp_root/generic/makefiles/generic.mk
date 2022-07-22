@@ -38,6 +38,9 @@ sdk_long_name=$(SDK_LONG_NAME_PREFIX)$(SDK_SHORT_NAME)
 sdk_generic_long_name=$(SDK_LONG_NAME_PREFIX)$(SDK_GENERIC_SHORT_NAME)
 csp_target_root=$(csp_root)$(sdk_generic_long_name)/
 
+-include $(csp_target_root)makefiles/tpoldr_helper.mk
+ID = $(shell $(PYTHON) $(csp_target_root)scripts/tesicman.py --tpo-loader=$(loader) --log-level=INFO --get-admin-id)
+
 -include $(csp_target_root)user_hook.mk
 $(info INFO: current working dir.  = $(shell pwd))
 $(info INFO: sdk_long_name         = $(sdk_long_name))
@@ -54,8 +57,6 @@ load_ihex=$(call $(sdk_long_name)_load_ihex,$1)
 $(info INFO: sdk_root              = $(sdk_root))
 $(info INFO: target_toolchain_path = $(target_toolchain_path))
 
-
-
 # Experimental options: basically works but not compatible with the -Map option of the linker
 # So for now we do not recommend to use that.
     # BUILD_PATH
@@ -69,7 +70,8 @@ $(warning WARNING: Custom BUILD_PATH, this is experimental, we noticed that link
 endif
 
 build_path:=$(call winpath2unix,$(BUILD_PATH))
-build_artifact_name:=$(build_path)$(PROJECT_NAME)
+build_artifact_name:=$(build_path)$(PROJECT_NAME)_$(ID)
+
 $(info INFO: build_path            = $(build_path))
 $(info INFO: build_artifact_name   = $(build_artifact_name))
 

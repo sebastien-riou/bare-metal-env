@@ -13,11 +13,10 @@ from datetime import date
 
 today = date.today()
 url_bare_metal_env="git@github.com:sebastien-riou/bare-metal-env.git"
-branch_bare_metal_env="master"
+branch_bare_metal_env="dev/integration-new_customer"
 
 url_sqn_module="git@github.com:Tiempogithub/SQN34X0VXI0_TESIC_0400XRXX.git"
 src_toolchain='"S:\\3.Technic\\1.Projet\\03-Application\\CSP\\Toolchains\\TESIC_0400XRXX"'
-
 
 def shell(cmd):
     stream = os.popen(cmd)
@@ -43,6 +42,11 @@ def clone_branch(url, *, branch='SQN34', module=None):
 def get_submodule():
     print(shell('git submodule update --init --recursive'))
     print(shell('git submodule update --remote --merge'))
+
+def get_current_branch():
+     current = shell(' git branch --show-current')
+     print(current)
+     return current
 
 def checkout(*,branch, tag):
     print(shell('git fetch --all --tags'))

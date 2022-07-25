@@ -13,7 +13,7 @@ from datetime import date
 
 today = date.today()
 url_bare_metal_env="git@github.com:sebastien-riou/bare-metal-env.git"
-branch_bare_metal_env="dev/integration-new_customer"
+branch_bare_metal_env="master"
 
 url_sqn_module="git@github.com:Tiempogithub/SQN34X0VXI0_TESIC_0400XRXX.git"
 src_toolchain='"S:\\3.Technic\\1.Projet\\03-Application\\CSP\\Toolchains\\TESIC_0400XRXX"'

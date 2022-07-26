@@ -38,9 +38,6 @@ sdk_long_name=$(SDK_LONG_NAME_PREFIX)$(SDK_SHORT_NAME)
 sdk_generic_long_name=$(SDK_LONG_NAME_PREFIX)$(SDK_GENERIC_SHORT_NAME)
 csp_target_root=$(csp_root)$(sdk_generic_long_name)/
 
--include $(csp_target_root)makefiles/tpoldr_helper.mk
-ID = $(shell $(PYTHON) $(csp_target_root)scripts/tesicman.py --tpo-loader=$(loader) --log-level=INFO --get-admin-id)
-
 -include $(csp_target_root)user_hook.mk
 $(info INFO: current working dir.  = $(shell pwd))
 $(info INFO: sdk_long_name         = $(sdk_long_name))
@@ -49,7 +46,6 @@ $(info INFO: csp_target_root       = $(csp_target_root))
 include $(csp_target_root)makefiles/$(sdk_short_name).mk
 include $(csp_target_root)makefiles/$(sdk_long_name).mk
 $(info INFO: DEBUG                 = $(DEBUG))
-
 
 post_process_ihex=$(call $(sdk_long_name)_post_process_ihex,$1)
 load_ihex=$(call $(sdk_long_name)_load_ihex,$1)

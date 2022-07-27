@@ -66,7 +66,7 @@ $(warning WARNING: Custom BUILD_PATH, this is experimental, we noticed that link
 endif
 
 build_path:=$(call winpath2unix,$(BUILD_PATH))
-build_artifact_name:=$(build_path)$(PROJECT_NAME)_$(ID)
+build_artifact_name:=$(build_path)$(PROJECT_NAME)_$(FWVID)
 
 $(info INFO: build_path            = $(build_path))
 $(info INFO: build_artifact_name   = $(build_artifact_name))

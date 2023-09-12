@@ -16,7 +16,7 @@ url_bare_metal_env="git@github.com:sebastien-riou/bare-metal-env.git"
 branch_bare_metal_env="master"
 
 url_sqn_module="git@github.com:Tiempogithub/SQN34X0VXI0_TESIC_0400XRXX.git"
-src_toolchain='"S:\\3.Technic\\1.Projet\\03-Application\\CSP\\Toolchains\\TESIC_0400XRXX"'
+
 
 def shell(cmd):
     stream = os.popen(cmd)
@@ -85,15 +85,10 @@ def zip_release(csp, sevenZip):
     with py7zr.SevenZipFile(sevenZip, 'w') as archive:
         archive.writeall(csp)
 
-def get_toolchain(src, dst):
-    if os.path.exists(dst):
-        shutil.rmtree(os.path.realpath(dst))
-
-    os.mkdir(os.path.realpath(dst))
-
-    path='"'+os.path.realpath(dst)+'"'
-    print("Copy from "+src+" ...")
-    cmd="xcopy "+src+" "+os.path.realpath(dst)+" /e"
+def get_toolchain():
+    print("Copy from gitlab packages...")
+    print("CURRENT FOLDER :::","\t",os.getcwd())
+    cmd="get_toolchain"
     print(shell(cmd))
 
 def main(args=None):
@@ -155,17 +150,21 @@ def main(args=None):
         logging.info("Update all submodules : done")
 
         # Get Toolchains
-        dst_toolchain=os.path.join(dst,'bare-metal-env/csp_root/'+module+'/dependencies/tam16exv2')
-        get_toolchain(src_toolchain, dst_toolchain)
+        current = os.getcwd()
+        dst_toolchain=os.path.join(dst,'bare-metal-env/csp_root/'+module+'/dependencies/')
+        os.chdir(dst_toolchain)
+        get_toolchain()
+        os.chdir(current)
         logging.info("Get Toolchains : done")
 
         # Copy release in dst
         copy_release(dst, csp_root_submodule)
         logging.info("Copy release in {} : done".format(dst))
+        shutil.rmtree(csp_root_submodule, onerror=del_rw)
 
         # Compress release
         os.chdir(dst)
-        logging.info("Make release {} in {} : in process".format(csp_root, dst))
+        logging.info("Zip release {} in {}: it takes about 10 minutes".format(csp_root, dst))
         zip_release('./csp_root', zipname)
         logging.info("Make release : done")
 

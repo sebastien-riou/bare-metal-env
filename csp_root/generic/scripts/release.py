@@ -88,7 +88,7 @@ def zip_release(csp, sevenZip):
 def get_toolchain():
     print("Copy from gitlab packages...")
     print("CURRENT FOLDER :::","\t",os.getcwd())
-    cmd="get_toolchain"
+    cmd="./get_toolchain"
     print(shell(cmd))
 
 def main(args=None):
